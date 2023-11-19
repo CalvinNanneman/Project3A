@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {% endblock %} - StockVisualizer</title>
+
+    <style>
+        /* Add some style for the border */
+        #chartForm {
+            border: 2px solid #333;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="chartForm">
+    <h1 name="header">Stock Data Visualizer</h1>
+
+    <form action="/" method="post">
+        <label for="symbol">Choose Symbol:</label>
+        <select id="symbol" name="symbol">
+            {% for symbol in symbols %}
+            <option value="{{ symbol }}">{{ symbol }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="chartType">Choose Chart Type:</label>
+        <select id="chartType" name="chartType">
+            <option value="line">Line Chart</option>
+            <option value="bar">Bar Chart</option>
+            <!-- Add more chart types as needed -->
+        </select>
+        <br>
+
+        <label for="timeSeries">Choose Time Series:</label>
+        <select id="timeSeries" name="timeSeries">
+            <option value="TIME_SERIES_INTRADAY">Intraday</option>
+            <option value="TIME_SERIES_DAILY">Daily</option>
+            <option value="TIME_SERIES_WEEKLY">Weekly</option>
+            <option value="TIME_SERIES_MONTHLY">Monthly</option>
+            <!-- Add more time series options as needed -->
+        </select>
+        <br>
+
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate" required>
+        <br>
+
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate" name="endDate" required>
+        <br>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div id="userInput">
+    <!-- User input will be displayed here -->
+    <p>User Input:</p>
+    {% if userInput %}
+        <p>User Input: {{ userInput }}</p>
+        <img src="../stock_chart.svg" alt="Stock Chart">
+    {% endif %}
+</div>
+
+</body>
+</html>
